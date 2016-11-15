@@ -13,4 +13,4 @@ def app(environ, start_response):
     ]
     start_response(status, headers)
 
-return resp
+    return resp
