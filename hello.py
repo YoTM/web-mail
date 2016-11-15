@@ -1,14 +1,16 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import cgi, os
 
 def app(environ, start_response):
-
-    """ Попытка написать wsgi-приложение"""
-    query = os.environ.get('QUERY_STRING')
-    print query
-    response_headers = [
-        ('Content-type', 'text/plain')
+    """ Ф-я парсит аргументы из урла
+        и преобразует в словарь
+    """
+    resp = environ['QUERY_STRING'].split('&')
+    resp = [item+'\r\n' for item in resp]
+    status = '200 OK'
+    headers = [
+        ('Content-Type', 'text/plain')
     ]
-    start_response(status, response_headers)
-    return null
+    start_response(status, headers)
+
+return resp
