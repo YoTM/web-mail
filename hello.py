@@ -10,4 +10,4 @@ def app(environ, start_response):
         ('Content-type','text/plain')
     ]
     start_response(status, response_headers)
-    return
+    return null
