@@ -1,12 +1,4 @@
 #!/bin/bash
-#sudo ln -sf /home/box/web/etc/nginx.conf /etc/nginx/sites-enabled/default
-#sudo /etc/init.d/nginx restart
-
-#sudo ln -s /home/box/web/etc/gunicorn.conf   /etc/gunicorn.d/test
-#sudo /etc/init.d/gunicorn restart
-
-#cd /home/box/web/ask/ask
-#sudo gunicorn ask.wsgi &
 
 echo "Setup NGINX and GUNICORN on this machine..."
 echo "Create soft links to the /etc/ path nginx for setup config."
@@ -26,4 +18,11 @@ echo "Go to the path ~/web/ask"
 cd ~/web/ask
 echo "Run ask application on 0.0.0.0:8000!"
 gunicorn -b 0.0.0.0:8000 ask.wsgi:application &
+
+
+echo "Run MySQL"
+sudo /etc/init.d/mysql start
+echo "Creating Database"
+sudo mysql -uroot -e CREATE DATABASE QA_bd CHARACTER SET utf8
+
 echo "FINISH! SUCCESSFULLY"
