@@ -23,6 +23,6 @@ gunicorn -b 0.0.0.0:8000 ask.wsgi:application &
 echo "Run MySQL"
 sudo /etc/init.d/mysql start
 echo "Creating Database"
-sudo mysql -uroot -e CREATE DATABASE QA_bd CHARACTER SET utf8
+sudo mysql -u root -e CREATE DATABASE QA_bd CHARACTER SET utf8
 
 echo "FINISH! SUCCESSFULLY"
