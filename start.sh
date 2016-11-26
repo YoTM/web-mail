@@ -1,8 +1,20 @@
 #!/bin/bash
 
-#gunicorn -c /home/box/web/hello.py hello:app --daemon
-#gunicorn -c /home/box/web/ask/ask/wsgi.py wsgi:application --daemon
-#cd /home/box/web
-#sudo gunicorn -b 0.0.0.0:8000 hello:app &
-cd /home/box/web/ask/ask
-sudo gunicorn qa.wsgi &
+echo "Starting Mysql DataBase"
+sudo /etc/init.d/mysql start
+
+echo "Create new user admin"
+mysql -uroot -e "CREATE USER 'admin'@'localhost'"
+
+echo "Set password to user admin"
+mysql -uroot -e "SET PASSWORD FOR 'admin'@'localhost' = PASSWORD('admin123')"
+
+echo "Create scheme with name askapp"
+mysql -uroot -e "CREATE DATABASE askapp"
+
+echo "Give rights on this shceme for admin"
+mysql -uroot -e "GRANT ALL ON askapp.* TO 'admin'@'localhost'"
+
+
+
+

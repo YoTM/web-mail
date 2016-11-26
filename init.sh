@@ -19,10 +19,4 @@ cd ~/web/ask
 echo "Run ask application on 0.0.0.0:8000!"
 gunicorn -b 0.0.0.0:8000 ask.wsgi:application &
 
-
-echo "Run MySQL"
-sudo /etc/init.d/mysql start
-echo "Creating Database"
-sudo mysql -u root -e CREATE DATABASE QA_bd CHARACTER SET utf8
-
 echo "FINISH! SUCCESSFULLY"
