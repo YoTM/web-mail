@@ -1,14 +1,17 @@
 #!/usr/bin/env python
+import uuid
+
+from django.contrib.auth.models import User
 from django.db import models
 
-# Create your models here.
-from django.contrib.auth.models import User
-
 class QuestionManager(models.Manager):
+
         def new(self):
-                pass
+            qs = super(QuestionManager, self).get_queryset()
+            return qs.order_by('-id')
         def popular(self):
-                pass
+            qs = super(QuestionManager, self).get_queryset()
+            return qs.order_by('-rating')
 
 class Question(models.Model):
     objects = QuestionManager()
@@ -16,14 +19,23 @@ class Question(models.Model):
     text = models.TextField()
     added_at = models.DateField(auto_now_add=True)
     rating = models.IntegerField(default=0)
-    author = models.ForeignKey(User, default='x', related_name='question_author')
+    author = models.ForeignKey(User, related_name='question_author')
     likes = models.ManyToManyField(User, related_name='question_like')
+
+    def get_url(selfself):
+        return "/question/{}/".format(self.id)
+
+    def __unicode__(self):
+        return self.title
 
 class Answer(models.Model):
     text = models.TextField()
     added_at = models.DateField(auto_now_add=True)
     question = models.ForeignKey(Question)
     author = models.ForeignKey(User)
+
+    def __unicode__(self):
+        return self.title
 
 
 
