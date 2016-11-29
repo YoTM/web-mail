@@ -32,4 +32,4 @@ def popular(request):
         'questions': page.object_list,
         'paginator': paginator,
         'page': page,
-})
+    })

@@ -22,7 +22,7 @@ class Question(models.Model):
     author = models.ForeignKey(User, related_name='question_author')
     likes = models.ManyToManyField(User, related_name='question_like')
 
-    def get_url(selfself):
+    def get_url(self):
         return "/question/{}/".format(self.id)
 
     def __unicode__(self):
